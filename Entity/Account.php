@@ -1,57 +1,42 @@
-<?php
+<?php 
 
-class Account 
+class Account
 {
+    private $accountName;
+    private $accountType;
+    private $accountBalance;
+    private $accountCurrency;
 
-    // private $id;
-
-    private $email;
-
-    private $name;
-
-    private $password;
-
-    private $PlainPassword;
-
-    function __constructeur($id,$email,$password){
-        // $this->id = $id;
-        $this->email = $email;
-        $this->generateName($email);
-        $this->encryptPassword($password);
+    public function __construct($accountName, $accountType, $accountBalance, $accountCurrency){
+        $this->accountName = $accountName;
+        $this->accountType = $accountType;
+        $this->accountBalance = $accountBalance;
+        $this->accountCurrency = $accountCurrency;
     }
 
-    // public function getId(){
-    //     return $this->id;
-    // }
-
-    public function getEmail(){
-        return $this->email;
+    public function getAccountName(){
+        return $this->accountName;
     }
-    public function setEmail($email){
-        return $this->email = $email;
+    public function getAccountType(){
+        return $this->accountType;
     }
-
-    public function getName(){
-        return $this->name;
+    public function getAccountBalance(){
+        return $this->accountBalance;
     }
-    public function setName($name){
-        return $this->name = $anme;
-    }
-    private function generateName($email){
-        $str = explode("@",$email);
-        $this->name = $str[0];
+    public function getAccountCurrency(){
+        return $this->accountCurrency;
     }
 
-    public function setPassword(){
-
+    public function setAccountName($newName){
+        $this->accountName = $newName;
     }
-    public function getPassword(){
-        return $this->password;
+    public function setAccountType($newType){
+        $this->accountName = $newType;
     }
-
-    private function encryptPassword($password){
-        $salt = substr($this->email,0,3);
-        $this->password = hash('sha256', $salt.$password);
+    public function setAccountCurrency($newCurrency){
+        $this->accountName = $newCurrency;
     }
-
+    public function setAccountBalance($newBalance){
+        $this->accountName = $newBalance;
+    }
 }

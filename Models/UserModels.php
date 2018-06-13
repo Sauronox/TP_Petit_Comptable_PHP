@@ -1,7 +1,7 @@
 <?php
 
 require_once 'Database.php';
-require_once '../Entity/Account.php';
+require_once '../Entity/User.php';
 
 function addUser($user,$password){
     $bdd = createConnection();
