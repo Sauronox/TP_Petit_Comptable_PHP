@@ -1,7 +1,13 @@
 <?php
-require_once '../Models/UserModels.php';
+require_once './Models/UserModels.php';
 session_start();
 
+if(isset($_SESSION['user'])){
+    header("location: panel");
+}else{
+    if(!isset($_COOKIE['user'])){loginUserForm();}
+    else {getCookieUser();var_dump($_SESSION);} 
+}
 ?>
 
 <!DOCTYPE html>
@@ -11,17 +17,11 @@ session_start();
     <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="./css/style.css">
+
     <title>Document</title>
 </head>
 <body>
-    <?php 
-    if(isset($_SESSION['user'])){
-        header("location: /Views/panel.php");
-    }else{
-        if(!isset($_COOKIE['user'])){loginUserForm();}
-        else {getCookieUser();var_dump($_SESSION);} 
-    }
-    ?>
     <form method="POST" action="">
             <p>
                 <span>Login</span>

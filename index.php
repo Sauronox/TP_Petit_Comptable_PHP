@@ -1,21 +1,26 @@
 <?php
-$request_uri = explode('?', $_SERVER['REQUEST_URI'], 2);
-
-// Route it up!
-switch ($request_uri[0]) {
-    // Home page
-    case '/':
-        require './Views/index.php';
+// $request_uri = explode('?', $_SERVER['REQUEST_URI'], 2);
+$url = array("");
+if (isset($_GET['url'])) {
+    $url =  explode('/', $_GET['url']);
+}
+switch ($url[0]) {
+    case '':
+        include_once './Views/home.php';
         break;
-    // About page
-    case '/login':
-        require './Views/login.php';
+    case 'login':
+        include './Views/login.php';
         break;
-    // Everything else
+    case 'register':
+        include './Views/register.php';
+        break;
+    case 'accounts':
+        include './Views/accounts.php';
+        break;
+    case 'panel':
+        include './Views/panel.php';
+        break;
     default:
-        header('HTTP/1.0 404 Not Found');
-        require './Views/404.php';
+        include './Views/404.php';
         break;
 }
-
-?>

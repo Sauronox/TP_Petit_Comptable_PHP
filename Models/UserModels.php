@@ -1,19 +1,23 @@
 <?php
 
-require_once 'Database.php';
-require_once '../Entity/User.php';
+require_once './Models/Database.php';
+require_once './Entity/User.php';
 
 function addUser($user,$password){
     $bdd = createConnection();
     $passwHash = hash('sha256', $password);
-    $insertUser = $bdd->prepare('INSERT INTO accounts (username,password) VALUES (:username,:password)');
+    $insertUser = $bdd->prepare('INSERT INTO users (email,password) VALUES (:email,:password)');
     $insertUser->execute(array(
-        "username" => $user,
+        "email" => $user,
         "password" => $passwHash
     ));
 
     if($insertUser->rowCount() == 0) {return "error";}
-    else {$_SESSION['user'] = new Account($user,$password);loginUser($user, $passwHash);}
+    else {
+        $_SESSION['user'] = new User($user,$password);
+        loginUser($user, $passwHash);
+        header('Location: ./panel');
+    }
 } 
 function addUserForm(){
     if (isset($_POST['submit'])) { 
@@ -25,16 +29,16 @@ function addUserForm(){
 function loginUser($email,$password){
     $bdd = createConnection();
     isset($_COOKIE['user']) ? $passwHash = $password : $passwHash = hash('sha256', $password);
-    $selectUser = $bdd->prepare('SELECT * FROM accounts WHERE username=:username AND password=:password');
+    $selectUser = $bdd->prepare('SELECT * FROM users WHERE email=:email AND password=:password');
     $selectUser->execute(array(
-        "username" => $email,
+        "email" => $email,
         "password" => $passwHash
     ));
     $data = $selectUser->fetch();
     $duration = 7*24*3600;
 
     if($selectUser->rowCount() == 0){return "Error";}
-    else {$_SESSION['user'] = new Account($email,$password) ; header("location: ../Views/panel.php");$arrUser = array($email,$passwHash);if(!isset($_COOKIE['user'])){setcookie("user", json_encode($arrUser), time() +$duration, "/");}} 
+    else {$_SESSION['user'] = new User($email,$password) ; header("location: ../Views/panel.php");$arrUser = array($email,$passwHash);if(!isset($_COOKIE['user'])){setcookie("user", json_encode($arrUser), time() +$duration, "/");}} 
 }
 
 function loginUserForm(){
