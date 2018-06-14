@@ -1,6 +1,12 @@
 <?php
-    require_once './Models/UserModels.php';
-    addUserForm();  
+    require_once './Models/UserModels.php'; 
+    session_start();
+
+    if(isset($_SESSION['user'])){
+        header("location: panel");
+    }else{
+        addUserForm();
+    }
 ?>
 
 <!DOCTYPE html>
@@ -13,7 +19,7 @@
 
     <title>Document</title>
 </head>
-<body
+<body>
     <form method="POST" action="">
         <p>
             <span>S'enregistrer</span>

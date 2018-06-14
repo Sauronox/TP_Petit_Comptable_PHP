@@ -1,8 +1,8 @@
 <?php
 require_once './Models/AccountModels.php';
 session_start();
-if(isset($_SESSION['user'])){
-    header("location: panel");
+if(!isset($_SESSION['user'])){
+    header("location: login");
 }else{
     addAccountForm();
 }

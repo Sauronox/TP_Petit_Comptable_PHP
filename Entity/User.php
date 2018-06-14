@@ -1,57 +1,67 @@
 <?php
 
-class User 
+class User
 {
+    private $_userId;
+    private $_userEmail;
+    private $_userName;
+    private $_userPassword;
+    private $_usserDateCreation;
 
-    // private $id;
-
-    private $email;
-
-    private $name;
-
-    private $password;
-
-    private $PlainPassword;
-
-    function __constructeur($id,$email,$password){
-        // $this->id = $id;
-        $this->email = $email;
+    public function __construct($id, $email, $password, $dateCreation)
+    {
+        $this->setId($id);
+        $this->setEmail($email);
         $this->generateName($email);
-        $this->encryptPassword($password);
+        $this->setPassword($password);
+        $this->setDateCreation($dateCreation);
     }
 
-    // public function getId(){
-    //     return $this->id;
-    // }
-
-    public function getEmail(){
-        return $this->email;
+    public function getId()
+    {
+        return $this->_userId;
     }
-    public function setEmail($email){
-        return $this->email = $email;
+    public function setId($id){
+        $this->_userId = $id;
     }
-
-    public function getName(){
-        return $this->name;
+    
+    public function getEmail()
+    {
+        return $this->_userEmail;
     }
-    public function setName($name){
-        return $this->name = $anme;
-    }
-    private function generateName($email){
-        $str = explode("@",$email);
-        $this->name = $str[0];
+    public function setEmail($email)
+    {
+        $this->_userEmail = $email;
     }
 
-    public function setPassword(){
-
+    public function getName()
+    {
+        return $this->_userName;
     }
-    public function getPassword(){
-        return $this->password;
+    public function setName($name)
+    {
+         $this->_userName = $anme;
+    }
+    private function generateName($email)
+    {
+        $str = explode("@", $email);
+        $this->_userName = $str[0];
     }
 
-    private function encryptPassword($password){
-        $salt = substr($this->email,0,3);
-        $this->password = hash('sha256', $salt.$password);
+    public function setPassword($password){
+        $this->_userPassword = $password;
+    }
+    public function getPassword()
+    {
+        return $this->_userPassword;
     }
 
+    public function getDateCreation()
+    {
+        return $this->_usserDateCreation;
+    }
+    public function setDateCreation($dateCreation)
+    {
+        $this->_usserDateCreation = $dateCreation;
+    }
 }

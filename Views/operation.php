@@ -1,11 +1,15 @@
 <?php
+require_once './Models/OperationModels.php';
 require_once './Models/AccountModels.php';
+require_once './Entity/User.php';
+
 session_start();
-if(isset($_SESSION['user'])){
-    header("location: panel");
+if(!isset($_SESSION['user'])){
+    header("location: login");
 }else{
     addOperationForm();
 }
+
 ?>
 
 <!DOCTYPE html>
@@ -26,24 +30,43 @@ if(isset($_SESSION['user'])){
 
 <div id="container">
     <form method="POST" action="">
+        <div>
             <label> Choisir le Compte</label><br>
             <select name="idAccount">
-                <option value=""></option>
+                <?php foreach(getAllAccounts() as $key => $value):?>
+                    <option value="<?= htmlspecialchars($value['id']); ?>"><?= htmlspecialchars($value['name']); ?></option>
+                    <option value=""><?php $key ?></option>
+                <?php endforeach; ?>
             </select>
+        </div>
+        <div>
+            <label> Nom de l'opération (32 caractère)</label><br>
             <input type="text" name="name" placeHolder="Nom" required><br>
+        </div>
+        <div>
+            <label>Montant</label><br>
             <input type="number" name="amount" id="">
+        </div>
+        <div>
+            <label> Catégorie de l'opération</label><br>
             <select name="category" id="">
-                <option value=""></option>
+                <?php foreach (getAllCategory() as $key => $value): ?>
+                    <option value="<?= $value['id']?>"><?= $value['name']?> - <?= $value['type']?></option>
+                <?php endforeach; ?>
             </select>
-            <select name="paiement" id="">
+        </div>
+        <div>
+            <label> Mode de paimement</label><br>
+            <select name="paiement">
                 <option value="CB">Carte Bancaire</option>
                 <option value="CH">Chèque</option>
                 <option value="Virement">Virement</option>
                 <option value="Prelevement">Prélevement</option>
             </select>
-
-            <input type="submit" name="submit">
+        </div>
+            <br><input type="submit" name="submit">
     </form>
+    <div>
 </div>
 </body>
 </html>

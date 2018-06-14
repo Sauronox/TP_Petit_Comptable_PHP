@@ -1,6 +1,10 @@
 <?php
 require_once './Models/UserModels.php';
-session_start();
+require_once './Models/AccountModels.php';
+session_start();  
+// var_dump($_POST);
+deleteAccount();
+updateAccount();
 if(!isset($_SESSION['user'])){
     header("location: ./");
 }
@@ -18,7 +22,56 @@ if(!isset($_SESSION['user'])){
     <title>Panel</title>
 </head>
 <body>
-    <a href="./logout.php">Logout</a>
-
+<nav id="top-navbar">
+            <div id="navbar___logo"></div>
+            <a href="login" id="change">login</a>
+    </nav>
+    <a href="./logout">Logout</a>
+    <div>
+    <form action="./account" method="get">
+        <label>Choisir un compte</label><br>
+        <select name="account" id="">
+        <?php foreach(getAllAccounts() as $value):?>
+            <option value="<?= $value['id'] ?>"><?= $value['name'] ?></option>
+        <?php endforeach;?>
+        </select><br>
+        <input type="submit" value="Valider">
+    </form>
+    </div>
+    <div>
+    <form action="" method="post">
+        <span>supression d'un compte</span><br>
+        <select name="account">
+        <?php foreach(getAllAccounts() as $value):?>
+            <option name="account" value="<?= $value['id'] ?>"><?= $value['name'] ?></option>
+        <?php endforeach;?>
+        </select><br>
+        <input type="submit" name="Supprimer" value="Supprimer" >
+    </form>
+    </div>
+    <div>
+    <table>
+        <tr>
+            <th>#</th>
+            <th>Name</th>
+            <th>Type</th>
+            <th>Balance</th>
+            <th>Currency</th>
+            <th>Editer</th>
+            <th>Suprimmer</th>
+        </tr>
+        <tr>
+        <?php foreach(getAllAccounts() as $value): ?>   
+            <th><?= $value['id']?></th>
+            <th><?= $value['name']?></th>
+            <th><?= $value['type']?></th>
+            <th><?= $value['balance']?></th>
+            <th><?= $value['currency']?></th>
+            <th><button href="">Editer</button></th>
+            <th><button href="">Supprimer</button></th>
+        </tr>
+        <?php endforeach; ?>
+    </table>
+    </div>
 </body>
 </html>

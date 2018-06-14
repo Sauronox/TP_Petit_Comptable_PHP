@@ -23,6 +23,16 @@ switch ($url[0]) {
     case 'logout':
         include './Views/logout.php';
         break;
+    case 'operation':
+        include './Views/operation.php';
+        break;
+    case 'account':
+        if(!empty($url[1])){
+            include './Views/account.php'; 
+        }else{
+            include './Views/404.php';
+        }
+        break;
     default:
         include './Views/404.php';
         break;

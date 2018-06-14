@@ -2,21 +2,30 @@
 
 class Account
 {
+    private $accountId;
+    private $userId;
     private $accountName;
     private $accountType;
     private $accountBalance;
     private $accountCurrency;
 
-    public function __construct($accountName, $accountType, $accountBalance, $accountCurrency){
+    public function __construct($accountId,$userId,$accountName, $accountType, $accountBalance, $accountCurrency){
+        $this->accountId = $accountId;
+        $this->userId = $userId;
         $this->accountName = $accountName;
         $this->accountType = $accountType;
         $this->accountBalance = $accountBalance;
         $this->accountCurrency = $accountCurrency;
     }
-
+    public function getAccountId(){
+        return $this->accountId;
+    }
     public function getAccountName(){
         return $this->accountName;
     }
+    public function getUserId(){
+        return $this->userId;
+    } 
     public function getAccountType(){
         return $this->accountType;
     }

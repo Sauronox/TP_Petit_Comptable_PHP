@@ -14,7 +14,6 @@ function addUser($user,$password){
 
     if($insertUser->rowCount() == 0) {return "error";}
     else {
-        $_SESSION['user'] = new User($user,$password);
         loginUser($user, $passwHash);
         header('Location: ./panel');
     }
@@ -38,7 +37,7 @@ function loginUser($email,$password){
     $duration = 7*24*3600;
 
     if($selectUser->rowCount() == 0){return "Error";}
-    else {$_SESSION['user'] = new User($email,$password) ; header("location: ../Views/panel.php");$arrUser = array($email,$passwHash);if(!isset($_COOKIE['user'])){setcookie("user", json_encode($arrUser), time() +$duration, "/");}} 
+    else {$_SESSION['user'] = new User($data['id'],$data['email'],$data['password'],$data['dateCreation']) ; header("location: panel");$arrUser = array($email,$passwHash);if(!isset($_COOKIE['user'])){setcookie("user", json_encode($arrUser), time() +$duration, "/");}} 
 }
 
 function loginUserForm(){

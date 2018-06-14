@@ -5,4 +5,4 @@ setcookie('user', '', time()-3600, "/");
 unset($_COOKIE['user']);
 
 session_destroy();
-header("location: ../Views/login.php");
+header("location: login");
