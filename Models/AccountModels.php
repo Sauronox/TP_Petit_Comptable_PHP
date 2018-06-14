@@ -71,18 +71,16 @@ function deleteAccount(){
     }
 }
 
-function updateAccount(){
+function updateAccount($value){
+    $value = strval($value);
     if(isset($_POST['Update'])){
         $bdd = createConnection();
-        $selectAllAccount = $bdd->prepare('UPDATE accounts SET name = :name, type = :type, balance = :balance, currency = :currency WHERE id = :id');
+        $selectAllAccount = $bdd->prepare('UPDATE accounts SET '.$value.'= :value  WHERE id = :id');
         $selectAllAccount->execute(array(
-            "id" => $_POST['id'],
-            "name" => $_POST['name'],
-            "type" => $_POST['type'],
-            "balance" => $_POST['balance'],
-            "currency" => $_POST['currency']
+            "value" => $_POST[ $value]
+
         ));  
         if($selectAllAccount->rowCount() == 1) {return "Error";}
-        else {return "Account modified";hreader("location: ./panel");}
+        else {return "Account modified";}
 }   
 }

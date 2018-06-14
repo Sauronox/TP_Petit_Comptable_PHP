@@ -28,9 +28,9 @@ switch ($url[0]) {
         break;
     case 'account':
         if(!empty($url[1])){
-            include './Views/account.php'; 
+            include './Views/account.php';
         }else{
-            include './Views/404.php';
+            include './Views/panel.php';
         }
         break;
     default:
