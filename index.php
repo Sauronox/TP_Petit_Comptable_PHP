@@ -6,7 +6,7 @@ if (isset($_GET['url'])) {
 }
 switch ($url[0]) {
     case '':
-        include_once './Views/home.php';
+        include './Views/home.php';
         break;
     case 'login':
         include './Views/login.php';
@@ -19,6 +19,9 @@ switch ($url[0]) {
         break;
     case 'panel':
         include './Views/panel.php';
+        break;
+    case 'logout':
+        include './Views/logout.php';
         break;
     default:
         include './Views/404.php';
