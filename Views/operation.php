@@ -45,7 +45,7 @@ if(!isset($_SESSION['user'])){
         </div>
         <div>
             <label>Montant</label><br>
-            <input type="number" name="amount" id="">
+            <input type="number" step="0.01" name="amount" id="">
         </div>
         <div>
             <label> Catégorie de l'opération</label><br>

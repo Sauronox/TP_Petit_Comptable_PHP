@@ -4,7 +4,8 @@ require_once './Models/AccountModels.php';
 session_start();  
 // var_dump($_POST);
 deleteAccount();
-updateAccount();
+redirectUpdate();
+
 if(!isset($_SESSION['user'])){
     header("location: ./");
 }
@@ -28,15 +29,16 @@ if(!isset($_SESSION['user'])){
     </nav>
     <a href="./logout">Logout</a>
     <div>
-    <form action="./account" method="get">
+    <form action="" method="post">
         <label>Choisir un compte</label><br>
         <select name="account" id="">
         <?php foreach(getAllAccounts() as $value):?>
-            <option value="<?= $value['id'] ?>"><?= $value['name'] ?></option>
+            <option name="<?= $value['id'] ?>" value="<?= $value['id'] ?>"><?= $value['name'] ?></option>
         <?php endforeach;?>
         </select><br>
         <input type="submit" value="Valider">
     </form>
+    <button><a href="./accounts">Creer un compte</a></button
     </div>
     <div>
     <form action="" method="post">

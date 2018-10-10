@@ -22,6 +22,10 @@ if(isset($_SESSION['user'])){
     <title>Document</title>
 </head>
 <body>
+<nav id="top-navbar">
+        <div id="navbar___logo"></div>
+        <a href="login" id="change">Logout</a>
+</nav>
     <form method="POST" action="">
             <p>
                 <span>Login</span>
